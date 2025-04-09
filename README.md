@@ -1,0 +1,1 @@
+This system is thought to help food factories to take note about what they produce, their costs, their recipes, and sellings. The idea is that in the future, these factories can use the systema for all their requierements, like billing and taking control about their budget.
