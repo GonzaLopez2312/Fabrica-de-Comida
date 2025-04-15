@@ -3,20 +3,26 @@ package factory.entity;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 
+import java.time.Instant;
+
 @NoArgsConstructor
 @Entity
-@Table(name = "Venta")
-public class Venta extends BaseEntity{
+@Table(name = "ventas")
+public class Venta {
 
-    @Column(name = "totalVenta")
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "venta_seq_gen")
+    @SequenceGenerator(name = "venta_seq_gen", sequenceName = "ventas_id_seq", allocationSize = 1)
+    private Long id;
+    public Instant createdAt;
     private float totalVenta;
-    @OneToOne
-    @JoinColumn(name = "facturaId")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "facturaId", referencedColumnName = "id")
     private Factura factura;
-    @ManyToOne
-    @JoinColumn(name = "usuarioId", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuarioId", nullable = false, referencedColumnName = "id")
     private Usuario usuario;
-    @ManyToOne
-    @JoinColumn(name = "movimientoCajaId", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "movimientoCajaId", nullable = false, referencedColumnName = "id")
     private MovimientoCaja movimientoCaja;
 }

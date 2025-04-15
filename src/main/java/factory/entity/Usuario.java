@@ -3,14 +3,22 @@ package factory.entity;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 
+import java.time.Instant;
+
 @NoArgsConstructor
 @Entity
-@Table(name = "Usuario")
-public class Usuario extends BaseEntity{
+@Table(name = "usuarios")
+public class Usuario {
 
-    @Column(name = "nombreUsuario", nullable = false)
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuario_seq_gen")
+    @SequenceGenerator(name = "usuario_seq_gen", sequenceName = "usuarios_id_seq", allocationSize = 1)
+    private Long id;
+    public Instant createdAt;
+    public Instant updatedAt;
+    public Instant deletedAt;
     private String nombreUsuario;
-    @ManyToOne
-    @JoinColumn(name = "tipoUsuarioId", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tipoUsuarioId", nullable = false, referencedColumnName = "id")
     private TipoUsuario tipoUsuario;
 }

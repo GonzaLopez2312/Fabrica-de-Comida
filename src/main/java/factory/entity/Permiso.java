@@ -1,17 +1,22 @@
 package factory.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
+
+import java.time.Instant;
 
 @NoArgsConstructor
 @Entity
-@Table(name = "Permiso")
-public class Permiso extends BaseEntity{
+@Table(name = "permisos")
+public class Permiso {
 
-    @Column(name = "nombrePermiso", nullable = false)
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "permiso_seq_gen")
+    @SequenceGenerator(name = "permiso_seq_gen", sequenceName = "permisos_id_seq", allocationSize = 1)
+    private Long id;
+    public Instant createdAt;
+    public Instant updatedAt;
+    public Instant deletedAt;
     private String nombrePermiso;
-    @Column(name = "urlPermiso", nullable = false)
     private String urlPermiso;
 }
