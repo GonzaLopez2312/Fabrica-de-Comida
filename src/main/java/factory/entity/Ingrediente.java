@@ -10,14 +10,13 @@ import java.time.Instant;
 @Table(name = "ingredientes")
 public class Ingrediente {
 
-
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ingrediente_producto_seq_gen")
-    @SequenceGenerator(name = "ingrediente_producto_seq_gen", sequenceName = "ingredientes_productos_id_seq", allocationSize = 1)
-    public String id;
-    public Instant createdAt;
-    public Instant deletedAt;
-    public Instant updatedAt;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ingrediente_seq_gen")
+    @SequenceGenerator(name = "ingrediente_seq_gen", sequenceName = "ingredientes_id_seq", allocationSize = 1)
+    private String id;
+    private Instant createdAt;
+    private Instant deletedAt;
+    private Instant updatedAt;
     private float cantidadIngrediente;
     private float costoIngrediente;
     @ManyToOne(fetch = FetchType.LAZY)

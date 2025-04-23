@@ -14,8 +14,8 @@ public class TipoUsuario {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tipo_usuario_seq_gen")
     @SequenceGenerator(name = "tipo_usuario_seq_gen", sequenceName = "tipo_usuarios_id_seq", allocationSize = 1)
     private Long id;
-    public Instant createdAt;
-    public Instant updatedAt;
-    public Instant deletedAt;
+    private Instant createdAt;
+    private Instant updatedAt;
+    private Instant deletedAt;
     private String nombreTipoUsuario;
 }

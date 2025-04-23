@@ -14,9 +14,9 @@ public class Receta  {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "receta_seq_gen")
     @SequenceGenerator(name = "receta_seq_gen", sequenceName = "recetas_id_seq", allocationSize = 1)
     private Long id;
-    public Instant createdAt;
-    public Instant updatedAt;
-    public Instant deletedAt;
+    private Instant createdAt;
+    private Instant updatedAt;
+    private Instant deletedAt;
     private String descripcionReceta;
     private String nombreReceta;
 }

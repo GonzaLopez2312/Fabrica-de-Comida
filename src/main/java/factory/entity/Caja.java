@@ -12,9 +12,9 @@ public class Caja {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "caja_seq_gen")
-    @SequenceGenerator(name = "caja_seq_gen", sequenceName = "caja_id_seq", allocationSize = 1)
+    @SequenceGenerator(name = "caja_seq_gen", sequenceName = "cajas_id_seq", allocationSize = 1)
     private Long id;
     private float totalCaja;
-    public Instant updatedAt;
+    private Instant updatedAt;
 
 }

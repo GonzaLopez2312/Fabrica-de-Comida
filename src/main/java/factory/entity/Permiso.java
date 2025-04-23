@@ -14,9 +14,9 @@ public class Permiso {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "permiso_seq_gen")
     @SequenceGenerator(name = "permiso_seq_gen", sequenceName = "permisos_id_seq", allocationSize = 1)
     private Long id;
-    public Instant createdAt;
-    public Instant updatedAt;
-    public Instant deletedAt;
+    private Instant createdAt;
+    private Instant updatedAt;
+    private Instant deletedAt;
     private String nombrePermiso;
     private String urlPermiso;
 }

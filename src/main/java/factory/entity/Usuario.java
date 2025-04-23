@@ -14,9 +14,9 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuario_seq_gen")
     @SequenceGenerator(name = "usuario_seq_gen", sequenceName = "usuarios_id_seq", allocationSize = 1)
     private Long id;
-    public Instant createdAt;
-    public Instant updatedAt;
-    public Instant deletedAt;
+    private Instant createdAt;
+    private Instant updatedAt;
+    private Instant deletedAt;
     private String nombreUsuario;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tipoUsuarioId", nullable = false, referencedColumnName = "id")

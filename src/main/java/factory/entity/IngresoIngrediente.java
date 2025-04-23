@@ -14,8 +14,8 @@ public class IngresoIngrediente {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ingreso_ingrediente_seq_gen")
     @SequenceGenerator(name = "ingreso_ingrediente_seq_gen", sequenceName = "ingreso_ingredientes_id_seq", allocationSize = 1)
     private Long id;
-    public Instant createdAt;
-    public Instant updatedAt;
+    private Instant createdAt;
+    private Instant updatedAt;
     private float cantidadIngresoIngrediente;
     private float costoIngresoIngrediente;
     @ManyToOne(fetch = FetchType.LAZY)

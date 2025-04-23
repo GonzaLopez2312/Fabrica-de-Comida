@@ -13,9 +13,9 @@ public class CategoriaIngrediente {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categoria_ingrediente_seq_gen")
     @SequenceGenerator(name = "categoria_ingrediente_seq_gen", sequenceName = "categoria_ingredientes_id_seq", allocationSize = 1)
-    public String id;
-    public Instant createdAt;
-    public Instant deletedAt;
-    public Instant updatedAt;
+    private String id;
+    private Instant createdAt;
+    private Instant deletedAt;
+    private Instant updatedAt;
     private String nombreCategoriaIngrediente;
 }

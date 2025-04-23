@@ -14,7 +14,7 @@ public class Venta {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "venta_seq_gen")
     @SequenceGenerator(name = "venta_seq_gen", sequenceName = "ventas_id_seq", allocationSize = 1)
     private Long id;
-    public Instant createdAt;
+    private Instant createdAt;
     private float totalVenta;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "facturaId", referencedColumnName = "id")

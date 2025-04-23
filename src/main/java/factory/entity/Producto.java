@@ -15,18 +15,18 @@ public class Producto {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "producto_seq_gen")
     @SequenceGenerator(name = "producto_seq_gen", sequenceName = "productos_id_seq", allocationSize = 1)
     private Long id;
-    public Instant createdAt;
-    public Instant updatedAt;
-    public Instant deletedAt;
-    public float costoProducto;
-    public String descripcionProducto;
-    public String nombreProducto;
-    public float precioProducto;
-    public int stockProducto;
+    private Instant createdAt;
+    private Instant updatedAt;
+    private Instant deletedAt;
+    private float costoProducto;
+    private String descripcionProducto;
+    private String nombreProducto;
+    private float precioProducto;
+    private int stockProducto;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoriaProductoId", nullable = false, referencedColumnName = "id")
-    public CategoriaProducto categoriaProducto;
+    private CategoriaProducto categoriaProducto;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "recetaId", nullable = false, referencedColumnName = "id")
-    public Receta receta;
+    private Receta receta;
 }

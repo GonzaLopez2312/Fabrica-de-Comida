@@ -14,9 +14,9 @@ public class TipoUsuarioPermiso {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tipo_usuario_permiso_seq_gen")
     @SequenceGenerator(name = "tipo_usuario_permiso_seq_gen", sequenceName = "tipo_usuario_permisos_id_seq", allocationSize = 1)
     private Long id;
-    public Instant createdAt;
-    public Instant updatedAt;
-    public Instant deletedAt;
+    private Instant createdAt;
+    private Instant updatedAt;
+    private Instant deletedAt;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "permisoId", nullable = false, referencedColumnName = "id")
     private Permiso permiso;

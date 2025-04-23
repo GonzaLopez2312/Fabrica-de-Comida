@@ -14,9 +14,9 @@ public class RecetaIngrediente {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "receta_ingrediente_seq_gen")
     @SequenceGenerator(name = "receta_ingrediente_seq_gen", sequenceName = "receta_ingredientes_id_seq", allocationSize = 1)
     private Long id;
-    public Instant createdAt;
-    public Instant updatedAt;
-    public Instant deletedAt;
+    private Instant createdAt;
+    private Instant updatedAt;
+    private Instant deletedAt;
     private float cantidadRecetaIngrediente;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ingredienteId", nullable = false, referencedColumnName = "id")

@@ -14,7 +14,7 @@ public class Factura {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "factura_seq_gen")
     @SequenceGenerator(name = "factura_seq_gen", sequenceName = "facturas_id_seq", allocationSize = 1)
     private Long id;
-    public Instant createdAt;
+    private Instant createdAt;
     private String conceptoFactura;
     private String condicionVentaFactura;
     private String cuitFactura;

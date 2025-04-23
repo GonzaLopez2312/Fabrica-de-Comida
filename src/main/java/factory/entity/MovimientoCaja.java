@@ -12,10 +12,10 @@ public class MovimientoCaja{
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "movimiento_caja_seq_gen")
-    @SequenceGenerator(name = "movimiento_caja_seq_gen", sequenceName = "movimientos_caja_id_seq", allocationSize = 1)
+    @SequenceGenerator(name = "movimiento_caja_seq_gen", sequenceName = "movimiento_cajas_id_seq", allocationSize = 1)
     private Long id;
-    public Instant createdAt;
-    public Instant updatedAt;    private float montoActualizado;
+    private Instant createdAt;
+    private Instant updatedAt;    private float montoActualizado;
     private float montoMovimientoCaja;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cajaId", nullable = false, referencedColumnName = "id")
