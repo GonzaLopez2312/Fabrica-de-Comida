@@ -146,6 +146,20 @@ CREATE SEQUENCE IF NOT EXISTS public.ventas_id_seq
     NO MAXVALUE
     CACHE 1;
 
+CREATE SEQUENCE IF NOT EXISTS public.negocios_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+CREATE SEQUENCE IF NOT EXISTS public.catalogos_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
 ------- TABLES -------
 
 -- CAJAS --
@@ -177,7 +191,8 @@ CREATE TABLE public.categoria_ingredientes
     nombre_categoria_ingrediente    VARCHAR(255) NOT NULL,
     created_at                      TIMESTAMP NOT NULL,
     updated_at                      TIMESTAMP,
-    deleted_at                      TIMESTAMP
+    deleted_at                      TIMESTAMP,
+    catalogo_id                     BIGINT NOT NULL
 );
 ALTER TABLE public.categoria_ingredientes ALTER COLUMN id SET DEFAULT nextval('categoria_ingredientes_id_seq');
 ALTER SEQUENCE public.categoria_ingredientes_id_seq OWNED BY public.categoria_ingredientes.id;
@@ -198,10 +213,11 @@ ALTER SEQUENCE public.categoria_ingresos_id_seq OWNED BY public.categoria_ingres
 CREATE TABLE public.categoria_productos
 (
     id                              BIGINT PRIMARY KEY NOT NULL,
-    nombre_categoria_producto        VARCHAR(255) NOT NULL,
+    nombre_categoria_producto       VARCHAR(255) NOT NULL,
     created_at                      TIMESTAMP NOT NULL,
     updated_at                      TIMESTAMP,
-    deleted_at                      TIMESTAMP
+    deleted_at                      TIMESTAMP,
+    catalogo_id                     BIGINT NOT NULL
 );
 ALTER TABLE public.categoria_productos ALTER COLUMN id SET DEFAULT nextval('categoria_productos_id_seq');
 ALTER SEQUENCE public.categoria_productos_id_seq OWNED BY public.categoria_productos.id;
@@ -234,7 +250,8 @@ CREATE TABLE public.facturas
     punto_venta_factura             VARCHAR(255),
     razon_social                    VARCHAR(255),
     receptor_factura                VARCHAR(255),
-    tipo_factura                    VARCHAR(255) NOT NULL CHECK ( type IN ('FACTURA_A', 'FACTURA_B', 'FACTURA_C', 'FACTURA_M') )
+    tipo_factura                    VARCHAR(255) NOT NULL CHECK ( type IN ('FACTURA_A', 'FACTURA_B', 'FACTURA_C', 'FACTURA_M') ),
+    negocio_id                      BIGINT NOT NULL
 );
 ALTER TABLE public.facturas ALTER COLUMN id SET DEFAULT nextval('facturas_id_seq');
 ALTER SEQUENCE public.facturas_id_seq OWNED BY public.factura.id;
@@ -302,7 +319,8 @@ CREATE TABLE public.movimiento_cajas
     updated_at                      TIMESTAMP,
     monto_movimiento_caja           DOUBLE PRECISION NOT NULL,
     caja                            BIGINT NOT NULL,
-    tipo_movimiento                 VARCHAR(255) NOT NULL CHECK ( type IN ('VENTA', 'INGRESO', 'EGRESO') )
+    tipo_movimiento                 VARCHAR(255) NOT NULL CHECK ( type IN ('VENTA', 'INGRESO', 'EGRESO') ),
+    negocio_id                      BIGINT NOT NULL
 );
 ALTER TABLE public.movimiento_cajas ALTER COLUMN id SET DEFAULT nextval('movimiento_cajas_id_seq');
 ALTER SEQUENCE public.movimiento_cajas_id_seq OWNED BY public.movimiento_cajas.id;
@@ -358,7 +376,8 @@ CREATE TABLE public.recetas
     updated_at                      TIMESTAMP,
     deleted_at                      TIMESTAMP,
     descripcion_receta              VARCHAR(255),
-    nombre_receta                   VARCHAR(255)
+    nombre_receta                   VARCHAR(255),
+    catalogo_id                     BIGINT NOT NULL
 );
 ALTER TABLE public.recetas ALTER COLUMN id SET DEFAULT nextval('recetas_id_seq');
 ALTER SEQUENCE public.recetas_id_seq OWNED BY public.recetas.id;
@@ -410,7 +429,8 @@ CREATE TABLE public.usuarios
     updated_at                      TIMESTAMP,
     deleted_at                      TIMESTAMP,
     nombreUsuario                   VARCHAR(255) NOT NULL,
-    tipo_usuario                    BIGINT NOT NULL
+    tipo_usuario                    BIGINT NOT NULL,
+    negocio_id                      BIGINT NOT NULL
 );
 ALTER TABLE public.usuarios ALTER COLUMN id SET DEFAULT nextval('usuarios_id_seq');
 ALTER SEQUENCE public.usuarios_id_seq OWNED BY public.usuarios.id;
@@ -427,6 +447,31 @@ CREATE TABLE public.ventas
 );
 ALTER TABLE public.ventas ALTER COLUMN id SET DEFAULT nextval('ventas_id_seq');
 ALTER SEQUENCE public.ventas_id_seq OWNED BY public.ventas.id;
+
+-- NEGOCIO
+CREATE TABLE public.negocios
+(
+    id                              BIGINT PRIMARY KEY NOT NULL,
+    created_at                      TIMESTAMP NOT NULL,
+    deleted_at                      TIMESTAMP NOT NULL,
+    nombre_negocio                  VARCHAR(255) NOT NULL,
+    razon_social                    VARCHAR(255) NOT NULL,
+    cuit                            VARCHAR(255) NOT NULL,
+    direccion                       VARCHAR(255) NOT NULL
+);
+ALTER TABLE public.negocios ALTER COLUMN id SET DEFAULT nextval('negocios_id_seq');
+ALTER SEQUENCE public.negocios_id_seq OWNED BY public.negocios.id;
+
+-- CATALOGO
+CREATE TABLE public.catalogos
+(
+    id                              BIGINT PRIMARY KEY NOT NULL,
+    created_at                      TIMESTAMP NOT NULL,
+    nombre_catalogo                 VARCHAR(255) NOT NULL,
+    negocio_id                      BIGINT NOT NULL
+);
+ALTER TABLE public.catalogos ALTER COLUMN id SET DEFAULT nextval('catalogos_id_seq');
+ALTER SEQUENCE public.catalogos_id_seq OWNED BY public.catalogos.id;
 
 ----- FOREIGN KEYS -----
 ALTER TABLE pulbic.egresos

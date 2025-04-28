@@ -17,13 +17,13 @@ public class Factura {
     private Instant createdAt;
     private String conceptoFactura;
     private String condicionVentaFactura;
-    private String cuitFactura;
-    private String direccionFactura;
     private String emisorFactura;
     private String iibb;
     private String puntoVentaFactura;
-    private String razonSocial;
     private String receptorFactura;
     @Enumerated(EnumType.STRING)
     private TipoFactura tipoFactura;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "negocioId", nullable = false, referencedColumnName = "id")
+    private Negocio negocio;
 }

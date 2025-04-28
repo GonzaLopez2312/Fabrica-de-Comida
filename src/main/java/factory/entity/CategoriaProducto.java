@@ -18,4 +18,7 @@ public class CategoriaProducto{
     private Instant deletedAt;
     private Instant updatedAt;
     private String nombreCategoriaProducto;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "catalogoId", nullable = false, referencedColumnName = "id")
+    private Catalogo catalogo;
 }

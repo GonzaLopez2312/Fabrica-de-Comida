@@ -21,4 +21,7 @@ public class Usuario {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tipoUsuarioId", nullable = false, referencedColumnName = "id")
     private TipoUsuario tipoUsuario;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "negocioId", nullable = false, referencedColumnName = "id")
+    private Negocio negocio;
 }
