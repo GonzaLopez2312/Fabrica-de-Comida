@@ -7,15 +7,15 @@ import java.time.Instant;
 
 @NoArgsConstructor
 @Entity
-@Table(name = "cajas")
-public class Caja {
+@Table(name = "catalogos")
+public class Catalogo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "caja_seq_gen")
-    @SequenceGenerator(name = "caja_seq_gen", sequenceName = "cajas_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "catalogo_seq_gen")
+    @SequenceGenerator(name = "catalogo_seq_gen", sequenceName = "catalogos_id_seq", allocationSize = 1)
     private Long id;
-    private float totalCaja;
-    private Instant updatedAt;
+    private Instant createdAt;
+    private String  nombreCatalogo;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "negocio_id", nullable = false, referencedColumnName = "id")
     private Negocio negocio;

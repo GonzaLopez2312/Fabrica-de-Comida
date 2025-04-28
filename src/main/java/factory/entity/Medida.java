@@ -1,17 +1,22 @@
 package factory.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
+
+import java.time.Instant;
 
 @NoArgsConstructor
 @Entity
-@Table(name = "Medida")
-public class Medida extends BaseEntity{
+@Table(name = "medidas")
+public class Medida {
 
-    @Column(name = "abreviacionMedida")
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "medida_seq_gen")
+    @SequenceGenerator(name = "medida_seq_gen", sequenceName = "medidas_id_seq", allocationSize = 1)
+    private Long id;
+    private Instant createdAt;
+    private Instant updatedAt;
+    private Instant deletedAt;
     private String abreviacionMedida;
-    @Column(name = "nombreMedida")
     private String nombreMedida;
 }

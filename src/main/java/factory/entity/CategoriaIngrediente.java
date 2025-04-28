@@ -1,15 +1,24 @@
 package factory.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
+
+import java.time.Instant;
 
 @NoArgsConstructor
 @Entity
-@Table(name = "CategoriaIngrediente")
-public class CategoriaIngrediente extends BaseEntity{
+@Table(name = "categoria_ingredientes")
+public class CategoriaIngrediente {
 
-    @Column(name = "nombreCategoriaIngrediente")
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categoria_ingrediente_seq_gen")
+    @SequenceGenerator(name = "categoria_ingrediente_seq_gen", sequenceName = "categoria_ingredientes_id_seq", allocationSize = 1)
+    private String id;
+    private Instant createdAt;
+    private Instant deletedAt;
+    private Instant updatedAt;
     private String nombreCategoriaIngrediente;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "catalogo_id", nullable = false, referencedColumnName = "id")
+    private Catalogo catalogo;
 }

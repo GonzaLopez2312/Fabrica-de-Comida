@@ -3,29 +3,27 @@ package factory.entity;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 
+import java.time.Instant;
+
 @NoArgsConstructor
 @Entity
-@Table(name = "Factura")
-public class Factura extends BaseEntity {
+@Table(name = "facturas")
+public class Factura {
 
-    @Column(name = "conceptoFactura")
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "factura_seq_gen")
+    @SequenceGenerator(name = "factura_seq_gen", sequenceName = "facturas_id_seq", allocationSize = 1)
+    private Long id;
+    private Instant createdAt;
     private String conceptoFactura;
-    @Column(name = "condicionVentaFactura")
     private String condicionVentaFactura;
-    @Column(name = "cuitFactura")
-    private String cuitFactura;
-    @Column(name = "direccionFactura")
-    private String direccionFactura;
-    @Column(name = "emisorFactura")
     private String emisorFactura;
-    @Column(name = "iibb")
     private String iibb;
-    @Column(name = "puntoVentaFactura")
     private String puntoVentaFactura;
-    @Column(name = "razonSocial")
-    private String razonSocial;
-    @Column(name = "receptorFactura")
     private String receptorFactura;
     @Enumerated(EnumType.STRING)
     private TipoFactura tipoFactura;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "negocio_id", nullable = false, referencedColumnName = "id")
+    private Negocio negocio;
 }
