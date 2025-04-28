@@ -17,6 +17,6 @@ public class Caja {
     private float totalCaja;
     private Instant updatedAt;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "negocioId", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "negocio_id", nullable = false, referencedColumnName = "id")
     private Negocio negocio;
 }

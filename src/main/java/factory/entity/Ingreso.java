@@ -19,9 +19,9 @@ public class Ingreso {
     private String descripcionIngreso;
     private float montoIngreso;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "categoriaIngresoId", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "categoria_ingreso_id", nullable = false, referencedColumnName = "id")
     private CategoriaIngreso categoriaIngreso;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "movimientoCajaId", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "movimiento_caja_id", nullable = false, referencedColumnName = "id")
     private MovimientoCaja movimientoCaja;
 }

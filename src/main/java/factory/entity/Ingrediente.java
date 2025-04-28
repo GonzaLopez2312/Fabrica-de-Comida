@@ -23,6 +23,6 @@ public class Ingrediente {
     @JoinColumn(name = "categoriaIngredienteId", nullable = false, referencedColumnName = "id")
     private CategoriaIngrediente categoriaIngrediente;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "medidaId", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "medida_id", nullable = false, referencedColumnName = "id")
     private Medida medida;
 }

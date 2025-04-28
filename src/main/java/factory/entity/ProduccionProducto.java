@@ -18,6 +18,6 @@ public class ProduccionProducto{
     private Instant updatedAt;
     private int cantidad;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "productoId", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "producto_id", nullable = false, referencedColumnName = "id")
     private Producto producto;
 }

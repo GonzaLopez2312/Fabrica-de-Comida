@@ -19,7 +19,7 @@ public class IngresoIngrediente {
     private float cantidadIngresoIngrediente;
     private float costoIngresoIngrediente;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ingredienteId", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "ingrediente_id", nullable = false, referencedColumnName = "id")
     private Ingrediente ingrediente;
 
 }

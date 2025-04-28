@@ -19,9 +19,9 @@ public class Usuario {
     private Instant deletedAt;
     private String nombreUsuario;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tipoUsuarioId", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "tipo_usuario_id", nullable = false, referencedColumnName = "id")
     private TipoUsuario tipoUsuario;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "negocioId", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "negocio_id", nullable = false, referencedColumnName = "id")
     private Negocio negocio;
 }

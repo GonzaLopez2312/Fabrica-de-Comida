@@ -18,7 +18,7 @@ public class MovimientoCaja{
     private Instant updatedAt;    private float montoActualizado;
     private float montoMovimientoCaja;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cajaId", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "caja_id", nullable = false, referencedColumnName = "id")
     private Caja caja;
     @Enumerated(EnumType.STRING)
     private TipoMovimiento tipoMovimiento;

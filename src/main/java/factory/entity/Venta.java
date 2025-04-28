@@ -17,12 +17,12 @@ public class Venta {
     private Instant createdAt;
     private float totalVenta;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "facturaId", referencedColumnName = "id")
+    @JoinColumn(name = "factura_id", referencedColumnName = "id")
     private Factura factura;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuarioId", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "usuario_id", nullable = false, referencedColumnName = "id")
     private Usuario usuario;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "movimientoCajaId", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "movimiento_caja_id", nullable = false, referencedColumnName = "id")
     private MovimientoCaja movimientoCaja;
 }

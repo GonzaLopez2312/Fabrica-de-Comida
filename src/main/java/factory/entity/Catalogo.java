@@ -17,6 +17,6 @@ public class Catalogo {
     private Instant createdAt;
     private String  nombreCatalogo;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "negocioId", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "negocio_id", nullable = false, referencedColumnName = "id")
     private Negocio negocio;
 }

@@ -24,9 +24,9 @@ public class Producto {
     private float precioProducto;
     private int stockProducto;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "categoriaProductoId", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "categoria_producto_id", nullable = false, referencedColumnName = "id")
     private CategoriaProducto categoriaProducto;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "recetaId", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "receta_id", nullable = false, referencedColumnName = "id")
     private Receta receta;
 }

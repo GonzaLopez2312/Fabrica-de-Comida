@@ -24,6 +24,6 @@ public class Factura {
     @Enumerated(EnumType.STRING)
     private TipoFactura tipoFactura;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "negocioId", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "negocio_id", nullable = false, referencedColumnName = "id")
     private Negocio negocio;
 }

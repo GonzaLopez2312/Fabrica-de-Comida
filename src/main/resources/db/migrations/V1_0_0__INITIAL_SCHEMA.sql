@@ -230,8 +230,8 @@ CREATE TABLE public.egresos
     updated_at                      TIMESTAMP,
     descripcion_egreso              VARCHAR(255) NOT NULL,
     monto_egreso                    DOUBLE PRECISION NOT NULL,
-    categoria_egreso                BIGINT NOT NULL,
-    movimiento_caja                 BIGINT NOT NULL
+    categoria_egreso_id             BIGINT NOT NULL,
+    movimiento_caja_id              BIGINT NOT NULL
 );
 ALTER TABLE public.egresos ALTER COLUMN id SET DEFAULT nextval('egresos_id_seq');
 ALTER SEQUENCE public.egresos_id_seq OWNED BY public.egresos.id;
@@ -265,8 +265,8 @@ CREATE TABLE public.ingredientes
     deleted_at                      TIMESTAMP,
     cantidad_ingrediente            DOUBLE PRECISION NOT NULL,
     costo_ingrediente               DOUBLE PRECISION NOT NULL,
-    categoria_ingrediente           BIGINT NOT NULL,
-    medida                          BIGINT NOT NULL
+    categoria_ingrediente_id        BIGINT NOT NULL,
+    medida_id                       BIGINT NOT NULL
 );
 ALTER TABLE public.ingredientes ALTER COLUMN id SET DEFAULT nextval('ingredientes_id_seq');
 ALTER SEQUENCE public.ingredientes_id_seq OWNED BY public.ingredientes.id;
@@ -279,8 +279,8 @@ CREATE TABLE public.ingresos
     updated_at                      TIMESTAMP,
     descripcion_ingreso             VARCHAR(255),
     monto_ingreso                   DOUBLE PRECISION NOT NULL,
-    categoria_ingreso               BIGINT NOT NULL,
-    movimiento_caja                 BIGINT NOT NULL
+    categoria_ingreso_id            BIGINT NOT NULL,
+    movimiento_caja_id              BIGINT NOT NULL
 );
 ALTER TABLE public.ingresos ALTER COLUMN id SET DEFAULT nextval('ingresos_id_seq');
 ALTER SEQUENCE public.ingresos_id_seq OWNED BY public.ingresos.id;
@@ -293,7 +293,7 @@ CREATE TABLE public.ingreso_ingredientes
     updated_at                      TIMESTAMP,
     cantidad_ingreso_ingrediente    VARCHAR(255) NOT NULL,
     costo_ingreso_ingrediente       DOUBLE PRECISION,
-    ingrediente                     BIGINT NOT NULL
+    ingrediente_id                  BIGINT NOT NULL
 );
 ALTER TABLE public.ingreso_ingredientes ALTER COLUMN id SET DEFAULT nextval('ingreso_ingredientes_id_seq');
 ALTER SEQUENCE public.ingreso_ingredientes_id_seq OWNED BY public.ingreso_ingredientes.id;
@@ -318,7 +318,7 @@ CREATE TABLE public.movimiento_cajas
     created_at                      TIMESTAMP NOT NULL,
     updated_at                      TIMESTAMP,
     monto_movimiento_caja           DOUBLE PRECISION NOT NULL,
-    caja                            BIGINT NOT NULL,
+    caja_id                         BIGINT NOT NULL,
     tipo_movimiento                 VARCHAR(255) NOT NULL CHECK ( type IN ('VENTA', 'INGRESO', 'EGRESO') ),
     negocio_id                      BIGINT NOT NULL
 );
@@ -345,7 +345,7 @@ CREATE TABLE public.produccion_productos
     created_at                      TIMESTAMP NOT NULL,
     updated_at                      TIMESTAMP,
     cantidad                        DOUBLE PRECISION NOT NULL,
-    producto                        BIGINT NOT NULL
+    producto_id                     BIGINT NOT NULL
 );
 ALTER TABLE public.produccion_productos ALTER COLUMN id SET DEFAULT nextval('produccion_productos_id_seq');
 ALTER SEQUENCE public.produccion_productos_id_seq OWNED BY public.produccion_productos.id;
@@ -362,8 +362,8 @@ CREATE TABLE public.productos
     nombre_producto                 VARCHAR(255) NOT NULL,
     precio_producto                 DOUBLE PRECISION NOT NULL,
     stock_producto                  INTEGER NOT NULL DEFAULT 0,
-    categoria_producto              BIGINT NOT NULL,
-    receta                          BIGINT NOT NULL
+    categoria_producto_id           BIGINT NOT NULL,
+    receta_id                       BIGINT NOT NULL
 );
 ALTER TABLE public.productos ALTER COLUMN id SET DEFAULT nextval('productos_id_seq');
 ALTER SEQUENCE public.productos_id_seq OWNED BY public.productos.id;
@@ -390,8 +390,8 @@ CREATE TABLE public.receta_ingredientes
     updated_at                      TIMESTAMP,
     deleted_at                      TIMESTAMP,
     cantidad_receta_ingrediente     DOUBLE PRECISION NOT NULL,
-    ingrediente                     BIGINT NOT NULL,
-    receta                          BIGINT NOT NULL
+    ingrediente_id                  BIGINT NOT NULL,
+    receta_id                       BIGINT NOT NULL
 );
 ALTER TABLE public.receta_ingredientes ALTER COLUMN id SET DEFAULT nextval('receta_ingredientes_id_seq');
 ALTER SEQUENCE public.receta_ingredientes_id_seq OWNED BY public.receta_ingredientes.id;
@@ -415,8 +415,8 @@ CREATE TABLE public.tipo_usuario_permisos
     created_at                      TIMESTAMP NOT NULL,
     updated_at                      TIMESTAMP,
     deleted_at                      TIMESTAMP,
-    permiso                         BIGINT NOT NULL,
-    tipo_usuario                    BIGINT NOT NULL
+    permiso_id                      BIGINT NOT NULL,
+    tipo_usuario_id                 BIGINT NOT NULL
 );
 ALTER TABLE public.tipo_usuario_permisos ALTER COLUMN id SET DEFAULT nextval('tipo_usuario_permisos_id_seq');
 ALTER SEQUENCE public.tipo_usuario_permisos_id_seq OWNED BY public.tipo_usuario_permisos.id;
@@ -429,7 +429,7 @@ CREATE TABLE public.usuarios
     updated_at                      TIMESTAMP,
     deleted_at                      TIMESTAMP,
     nombreUsuario                   VARCHAR(255) NOT NULL,
-    tipo_usuario                    BIGINT NOT NULL,
+    tipo_usuario_id                 BIGINT NOT NULL,
     negocio_id                      BIGINT NOT NULL
 );
 ALTER TABLE public.usuarios ALTER COLUMN id SET DEFAULT nextval('usuarios_id_seq');
@@ -441,9 +441,9 @@ CREATE TABLE public.ventas
     id                              BIGINT PRIMARY KEY NOT NULL,
     created_at                      TIMESTAMP NOT NULL,
     total_venta                     DOUBLE PRECISION NOT NULL,
-    factura                         BIGINT,
-    usuario                         BIGING NOT NULL,
-    movimiento_caja                 BIGINT NOT NULL
+    factura_id                         BIGINT,
+    usuario_id                         BIGING NOT NULL,
+    movimiento_caja_id                 BIGINT NOT NULL
 );
 ALTER TABLE public.ventas ALTER COLUMN id SET DEFAULT nextval('ventas_id_seq');
 ALTER SEQUENCE public.ventas_id_seq OWNED BY public.ventas.id;
@@ -474,5 +474,80 @@ ALTER TABLE public.catalogos ALTER COLUMN id SET DEFAULT nextval('catalogos_id_s
 ALTER SEQUENCE public.catalogos_id_seq OWNED BY public.catalogos.id;
 
 ----- FOREIGN KEYS -----
-ALTER TABLE pulbic.egresos
-    ADD CONSTRAINT FK_EGRESOS_ON_CATEGORIA_EGRESO FOREIGN KEY (categoria_egreso) REFERENCES public.categoria_egresos (id);
+ALTER TABLE public.cajas
+    ADD CONSTRAINT FK_CAJAS_ON_NEGOCIO FOREIGN KEY (negocio_id) REFERENCES public.negocios (id);
+
+ALTER TABLE public.catalogos
+    ADD CONSTRAINT FK_CATEGORIAS_ON_NEGOCIO FOREIGN KEY (negocio_id) REFERENCES public.negocios (id);
+
+ALTER TABLE public.categoria_ingredientes
+    ADD CONSTRAINT FK_CATEGORIA_INGREDIENTES_ON_CATALOGO FOREIGN KEY (catalogo_id) REFERENCES public.catalogos (id);
+
+ALTER TABLE public.categoria_productos
+    ADD CONSTRAINT FK_CATEGORIA_PRODUCTOS_ON_CATALOGO FOREIGN KEY (catalogo_id) REFERENCES public.categoria_productos(id);
+
+ALTER TABLE public.egresos
+    ADD CONSTRAINT FK_EGRESOS_ON_CATEGORIA_EGRESO FOREIGN KEY (categoria_egreso_id) REFERENCES public.categoria_egresos (id);
+
+ALTER TABLE public.egresos
+    ADD CONSTRAINT FK_EGRESOS_ON_MOVIMIENTO_CAJA FOREIGN KEY (movimiento_caja_id) REFERENCES public.movimiento_cajas (id);
+
+ALTER TABLE public.facturas
+    ADD CONSTRAINT FK_FACTURAS_ON_NEGOCIO FOREIGN KEY (negocio_id) REFERENCES public.negocios (id);
+
+ALTER TABLE public.ingredientes
+    ADD CONSTRAINT FK_INGREDIENTES_ON_CATEGORIA_INGREDIENTE FOREIGN KEY (categoria_ingrediente_id) REFERENCES public.categoria_ingredientes (id);
+
+ALTER TABLE public.ingredientes
+    ADD CONSTRAINT FK_INGREDIENTES_ON_MEDIDA FOREIGN KEY (medida_id) REFERENCES public.medidas (id);
+
+ALTER TABLE public.ingresos
+    ADD CONSTRAINT FK_INGRESOS_ON_CATEGORIA_INGRESO FOREIGN KEY (categoria_ingreso_id) REFERENCES public.categoria_ingresos (id);
+
+ALTER TABLE public.ingresos
+    ADD CONSTRAINT FK_INGRESOS_ON_MOVIMIENTO_CAJA FOREIGN KEY (movimiento_caja_id) REFERENCES public.movimiento_cajas (id);
+
+ALTER TABLE public.ingreso_ingredientes
+    ADD CONSTRAINT FK_INGRESO_INGREDIENTES_ON_INGREDIENTE FOREIGN KEY (ingrediente_id) REFERENCES public.ingredientes (id);
+
+ALTER TABLE public.movimiento_cajas
+    ADD CONSTRAINT FK_MOVIMIENTO_CAJAS_ON_CAJA FOREIGN KEY (caja_id) REFERENCES public.cajas (id);
+
+ALTER TABLE public.produccion_productos
+    ADD CONSTRAINT FK_PRODUCCION_PRODUCTOS_ON_PRODUCTO FOREIGN KEY (producto_id) REFERENCES public.productos (id);
+
+ALTER TABLE public.productos
+    ADD CONSTRAINT FK_PRODUCTOS_ON_CATEGORIA_PRODUCTO FOREIGN KEY (categoria_producto_id) REFERENCES public.categoria_productos (id);
+
+ALTER TABLE public.productos
+    ADD CONSTRAINT FK_PRODUCTOS_ON_RECETA FOREIGN KEY (receta_id) REFERENCES public.recetas (id);
+
+ALTER TABLE public.recetas
+    ADD CONSTRAINT FK_RECETAS_ON_CATALOGO FOREIGN KEY (catalogo_id) REFERENCES public.catalogos (id);
+
+ALTER TABLE public.receta_ingredientes
+    ADD CONSTRAINT FK_RECETA_INGREDIENTES_ON_INGREDIENTE FOREIGN KEY (ingrediente_id) REFERENCES public.ingredientes (id);
+
+ALTER TABLE public.receta_ingredientes
+    ADD CONSTRAINT FK_RECETA_INGREDIENTES_ON_RECETA FOREIGN KEY (receta_id) REFERENCES public.recetas (id);
+
+ALTER TABLE public.tipo_usuario_permisos
+    ADD CONSTRAINT FK_TIPO_USUARIO_PERMISOS_ON_PERMISO FOREIGN KEY (permiso_id) REFERENCES public.permisos (id);
+
+ALTER TABLE public.tipo_usuario_permisos
+    ADD CONSTRAINT FK_TIPO_USUARIO_PERMISOS_ON_TIPO_USUARIO FOREIGN KEY (tipo_usuario_id) REFERENCES public.tipo_usuarios (id);
+
+ALTER TABLE public.usuarios
+    ADD CONSTRAINT FK_USUARIOS_ON_TIPO_USUARIO FOREIGN KEY (tipo_usuario_id) REFERENCES public.tipo_usuarios (id);
+
+ALTER TABLE public.usuarios
+    ADD CONSTRAINT FK_USUARIOS_ON_NEGOCIO FOREIGN KEY (negocio_id) REFERENCES public.negocios (id);
+
+ALTER TABLE public.ventas
+    ADD CONSTRAINT FK_VENTAS_ON_FACTURA FOREIGN KEY (factura_id) REFERENCES public.facturas (id);
+
+ALTER TABLE public.ventas
+    ADD CONSTRAINT FK_VENTAS_ON_USUARIO FOREIGN KEY (usuario_id) REFERENCES public.usuarios (id);
+
+ALTER TABLE public.ventas
+    ADD CONSTRAINT FK_VENTAS_ON_MOVIMIENTO_CAJA FOREIGN KEY (movimiento_caja_id) REFERENCES public.movimiento_cajas (id);

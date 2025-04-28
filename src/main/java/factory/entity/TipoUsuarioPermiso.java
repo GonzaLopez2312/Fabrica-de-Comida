@@ -18,9 +18,9 @@ public class TipoUsuarioPermiso {
     private Instant updatedAt;
     private Instant deletedAt;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "permisoId", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "permiso_id", nullable = false, referencedColumnName = "id")
     private Permiso permiso;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tipoUsuarioId", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "tipo_usuario_id", nullable = false, referencedColumnName = "id")
     private TipoUsuario tipoUsuario;
 }

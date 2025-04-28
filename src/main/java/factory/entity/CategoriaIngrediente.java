@@ -19,6 +19,6 @@ public class CategoriaIngrediente {
     private Instant updatedAt;
     private String nombreCategoriaIngrediente;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "catalogoId", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "catalogo_id", nullable = false, referencedColumnName = "id")
     private Catalogo catalogo;
 }

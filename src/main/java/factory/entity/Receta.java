@@ -20,6 +20,6 @@ public class Receta  {
     private String descripcionReceta;
     private String nombreReceta;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "catalogoId", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "catalogo_id", nullable = false, referencedColumnName = "id")
     private Catalogo catalogo;
 }
